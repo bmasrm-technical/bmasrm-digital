@@ -1,26 +1,70 @@
 @import "tailwindcss";
 
+@theme {
+  --color-bg: #0A0908;
+  --color-card: #11100D;
+  --color-gold: #D2B277;
+  --color-text-main: #F3EEE4;
+  --color-muted: #A69D8C;
+  --color-line: rgba(210, 178, 119, 0.18);
+  --font-heading: var(--font-bodoni);
+  --font-body: var(--font-jost);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #0A0908;
+  --card: #11100D;
+  --gold: #D2B277;
+  --text: #F3EEE4;
+  --muted: #A69D8C;
+  --line: rgba(210, 178, 119, 0.18);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg);
+  color: var(--text);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-jost), sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: var(--font-bodoni), Georgia, serif;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0908;
+}
+::-webkit-scrollbar-thumb {
+  background: #26221b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #D2B277;
+}
+
+/* Motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
