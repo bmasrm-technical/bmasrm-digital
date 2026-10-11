@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Script from "next/script";
 
@@ -16,23 +16,10 @@ declare global {
 
 export function Tracker() {
   const pathname = usePathname();
-  const lastTrackedPath = useRef<string | null>(null);
 
   useEffect(() => {
     if (!pathname || pathname.startsWith("/admin")) return;
     if (window.navigator.doNotTrack === "1") return;
-    if (lastTrackedPath.current === pathname) return;
-
-    lastTrackedPath.current = pathname;
-
-    // Send page views to Google Analytics
-    if (typeof window.gtag === "function") {
-      window.gtag("event", "page_view", {
-        page_path: pathname,
-        page_title: document.title,
-        page_location: window.location.origin + pathname,
-      });
-    }
 
     // Keep the existing anonymous tracking
     try {
@@ -64,9 +51,7 @@ export function Tracker() {
           window.dataLayer = window.dataLayer || [];
           window.gtag = function(){window.dataLayer.push(arguments);};
           window.gtag('js', new Date());
-          window.gtag('config', '${GA_ID}', {
-            send_page_view: false
-          });
+          window.gtag('config', '${GA_ID}');
         `}
       </Script>
     </>
