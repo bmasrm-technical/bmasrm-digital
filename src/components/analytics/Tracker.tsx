@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Script from "next/script";
 
 const GA_ID = "G-MRMWD1X7PG";
@@ -16,29 +16,25 @@ declare global {
 
 export function Tracker() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const lastTrackedPath = useRef<string | null>(null);
 
   useEffect(() => {
     if (!pathname || pathname.startsWith("/admin")) return;
     if (window.navigator.doNotTrack === "1") return;
+    if (lastTrackedPath.current === pathname) return;
 
-    const query = searchParams.toString();
-    const pagePath = query ? `${pathname}?${query}` : pathname;
+    lastTrackedPath.current = pathname;
 
-    if (lastTrackedPath.current === pagePath) return;
-    lastTrackedPath.current = pagePath;
-
-    // Google Analytics page view
+    // Send page views to Google Analytics
     if (typeof window.gtag === "function") {
       window.gtag("event", "page_view", {
-        page_path: pagePath,
+        page_path: pathname,
         page_title: document.title,
-        page_location: window.location.origin + pagePath,
+        page_location: window.location.origin + pathname,
       });
     }
 
-    // Preserve the existing anonymous tracker
+    // Keep the existing anonymous tracking
     try {
       let visitorId = localStorage.getItem("bmasrm_vid");
 
@@ -50,12 +46,12 @@ export function Tracker() {
       fetch("/api/track", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ visitorId, path: pagePath }),
+        body: JSON.stringify({ visitorId, path: pathname }),
       }).catch(() => {});
     } catch {
       // Storage may be unavailable
     }
-  }, [pathname, searchParams]);
+  }, [pathname]);
 
   return (
     <>
