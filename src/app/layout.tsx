@@ -40,8 +40,8 @@ export const metadata: Metadata = {
     description: "Premium digital studio building high-class websites and video experiences.",
   },
   icons: {
-    icon: "/favicon.ico",
-  },
+  icon: "/favicon.png",
+},
 };
 
 export default function RootLayout({
