@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { createClient, isSupabaseConfigured } from "@/lib/supabase/server";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
- const baseUrl = "https://bmasrm.digital";
+ const baseUrl = "https://bmasrm-groups.netlify.app";
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {
