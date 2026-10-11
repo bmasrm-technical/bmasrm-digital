@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
   description:
     "BMASRM.digital is a premium digital studio that builds high-class websites and professional video experiences for ambitious businesses.",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://bmasrm-groups.netlify.app"),
   alternates: {
     canonical: "/",
   },
@@ -100,7 +100,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               "name": "BMASRM.digital",
-              "url": "https://bmasrm.digital",
+              "url": "https://bmasrm-groups.netlify.app",
               "description": "Premium digital studio building high-class websites and professional video experiences."
             })
           }}
