@@ -18,6 +18,9 @@ const jost = Jost({
 });
 
 export const metadata: Metadata = {
+    verification: {
+    google: "5fTMTovuem6GfoGdGGQvbsG4WJ0E2Ym6INm_9TTOGDI",
+  },
   title: {
     default: "BMASRM.digital | Premium Digital Studio",
     template: "%s | BMASRM.digital",
