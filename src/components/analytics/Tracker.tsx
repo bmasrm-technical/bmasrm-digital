@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Script from "next/script";
 
-const GA_ID = "G-MRMWD1X7PG";
+const GA_ID = "G-MRMMD1X7PG";
 
 declare global {
   interface Window {
